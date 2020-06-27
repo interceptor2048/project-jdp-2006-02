@@ -1,8 +1,8 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.ProductDto;
-import com.kodilla.ecommercee.domain.ProductOrder;
+import com.kodilla.ecommercee.domain.ProductOrderDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,9 +15,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*")
 public class CartController {
 
+
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart", consumes = APPLICATION_JSON_VALUE)
-    public Cart createEmptyCart() {
-        return new Cart(1L, 10L, 2L);
+    public CartDto createEmptyCart() {
+        return new CartDto(1L, 1L, null);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
@@ -26,8 +27,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
-    public Cart addProductToCart(@RequestBody ProductDto product) {
-        return new Cart(1L, product.getId(), 2L);
+    public CartDto addProductToCart(@RequestBody ProductDto product) {
+        return new CartDto(1L, 1L, product.getId());
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
@@ -36,7 +37,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = APPLICATION_JSON_VALUE)
-    public ProductOrder createOrder() {
-        return new ProductOrder(1L, 10L, 2L);
+    public ProductOrderDto createOrder(final CartDto cartDto) {
+        return new ProductOrderDto(1L, cartDto.getProduct_id(), cartDto.getUser_id());
     }
 }
