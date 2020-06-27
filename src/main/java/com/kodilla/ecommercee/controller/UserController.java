@@ -14,8 +14,8 @@ public class UserController {
     public UserDto createUser(@RequestBody UserDto userDto) {return userDto;}
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
-    public UserDto blockUser(@RequestBody UserDto userDto) {return userDto;}
+    public UserDto blockUser(@RequestBody UserDto userDto) {return new UserDto(1L, "TestingJohn", "0", "0");}
 
     @RequestMapping(method = RequestMethod.PUT, value = "generateUserKey")
-    public UserDto generateUserKey(@RequestBody UserDto userDto) {return userDto;}
+    public UserDto generateUserKey(@RequestBody UserDto userDto) {return new UserDto(1L, "TestingJohn", "0", "5");}
 }
