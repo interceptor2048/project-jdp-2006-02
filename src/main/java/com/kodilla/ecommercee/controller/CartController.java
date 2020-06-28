@@ -15,12 +15,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*")
 public class CartController {
 
-    private List<ProductDto> products = new ArrayList<>();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart", consumes = APPLICATION_JSON_VALUE)
     public CartDto createEmptyCart() {
-        return new CartDto(1L, 1L, new ArrayList<>());
+        return new CartDto(1L, 1L);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
@@ -29,19 +26,16 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
-    public CartDto addProductToCart(@RequestBody ProductDto product) {
-        products.add(product);
-        return new CartDto(1L, 1L, products);
+    public CartDto addProductToCart(@RequestBody ProductDto productDto) {
+        return new CartDto(1L, 2L);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
-    public boolean deleteProductFromCart(@RequestParam Long productId) {
-        products.remove(productId);
-        return true;
+    public void deleteProductFromCart(@RequestParam Long productId) {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = APPLICATION_JSON_VALUE)
     public OrderDto createOrder(final CartDto cartDto) {
-        return new OrderDto(1L, cartDto.getUserId(), cartDto.getId() );
+        return new OrderDto();
     }
 }
