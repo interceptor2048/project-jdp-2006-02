@@ -3,11 +3,14 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
-public class ProductOrderDto {
+public class OrderDto {
 
     private final Long id;
-    private final Long productId;
-    private final Long orderId;
+    private final Long userId;
+    private final Long cartId;
+
 }
