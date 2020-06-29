@@ -34,8 +34,8 @@ public class CartController {
     public void deleteProductFromCart(@RequestParam Long productId) {
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = APPLICATION_JSON_VALUE)
-    public OrderDto createOrder(final CartDto cartDto) {
+    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    public OrderDto createOrder(@RequestParam Long userId) {
         return new OrderDto();
     }
 }
