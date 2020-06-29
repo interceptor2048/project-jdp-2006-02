@@ -36,6 +36,6 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam Long userId) {
-        return new OrderDto();
+        return new OrderDto(1L, userId, "status");
     }
 }
