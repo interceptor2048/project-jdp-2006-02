@@ -35,10 +35,9 @@ public class GroupRepositoryTestSuite {
         Group group = new Group(1L,"test");
         groupRepository.save(group);
         //When
-        Optional<Group> groupResult = groupRepository.findById(group.getId());
+        Group groupResult = groupRepository.findById(group.getId()).orElse(new Group(2L,"test2"));
         //Then
-        assertEquals(group.getName(),groupResult.get().getName());
-        assertEquals(group.getId(),groupResult.get().getId());
+        assertEquals(group.getName(),groupResult.getName());
     }
 
     @Test
