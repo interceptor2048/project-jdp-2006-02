@@ -38,7 +38,6 @@ public class GroupRepositoryTestSuite {
         Optional<Group> groupResult = groupRepository.findById(group.getId());
         //Then
         assertTrue(groupResult.isPresent());
-        assertEquals(group.getName(),groupResult.get().getName());
     }
 
     @Test
