@@ -24,8 +24,9 @@ public class GroupRepositoryTestSuite {
         Group group = new Group(1L,"test1");
         //When
         groupRepository.save(group);
+        List<Group> groups = groupRepository.findAll();
         //Then
-        assertTrue(groupRepository.existsById(group.getId()));
+        assertTrue(groups.size()>0);
     }
 
     @Test
