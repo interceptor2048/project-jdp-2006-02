@@ -16,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "USER_ID")
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "USERNAME")
@@ -31,8 +31,8 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = com.kodilla.ecommercee.domain.Product.class)
     @JoinTable(
             name = "CART",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")}
     )
     private List<Product> productList = new ArrayList<>();
 }

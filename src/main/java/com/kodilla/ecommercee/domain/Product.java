@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class Product {
 
     @Id
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "ID")
     private Long id;
     private String name;
     private String description;
