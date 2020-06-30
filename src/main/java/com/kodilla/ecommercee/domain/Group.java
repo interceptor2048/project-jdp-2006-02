@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "GROUPS")
+@Entity(name = "GROUP_TABLE")
 public class Group {
 
     @Id
