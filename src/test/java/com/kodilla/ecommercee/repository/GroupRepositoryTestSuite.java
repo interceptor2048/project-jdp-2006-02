@@ -48,9 +48,9 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupFindAll(){
         //Given
-        Group group1 = new Group(2L,"test1");
-        Group group2 = new Group(3L,"test2");
-        Group group3 = new Group(4L,"test3");
+        Group group1 = new Group(2L,"test2");
+        Group group2 = new Group(3L,"test3");
+        Group group3 = new Group(4L,"test4");
         groupRepository.save(group1);
         groupRepository.save(group2);
         groupRepository.save(group3);
