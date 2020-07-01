@@ -26,4 +26,12 @@ public class GroupDbService {
         return groupRepository.save(group);
     }
 
+    public Group getGroupById(Long id){
+        return groupRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public void deleteGroup(Group group){
+        groupRepository.delete(group);
+    }
+
 }
