@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -20,4 +22,6 @@ public class Group {
     @Column(name = "NAME")
     private String name;
 
+    @OneToMany(targetEntity = Product.class, mappedBy = "group")
+    private List<Product> products = new ArrayList<>();
 }
