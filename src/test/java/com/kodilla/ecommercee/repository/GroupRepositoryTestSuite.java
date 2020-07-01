@@ -21,7 +21,7 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupSave(){
         //Given
-        Group group = new Group(1L,"test1");
+        Group group = new Group("test1");
         //When
         groupDbService.saveGroup(group);
         List<Group> groups = groupDbService.getAllGroups();
@@ -34,12 +34,11 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupFindById(){
         //Given
-        Group group = new Group(1L,"test");
+        Group group = new Group("test1");
         groupDbService.saveGroup(group);
         //When
         Group result = groupDbService.getGroupById(group.getId());
         //Then
-        assertTrue(result.getId()>0);
         assertEquals(group.getName(),result.getName());
         assertEquals(group.getId(),result.getId());
         //CleanUp
@@ -49,9 +48,9 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupFindAll(){
         //Given
-        Group group1 = new Group(2L,"test2");
-        Group group2 = new Group(3L,"test3");
-        Group group3 = new Group(4L,"test4");
+        Group group1 = new Group("test2");
+        Group group2 = new Group("test3");
+        Group group3 = new Group("test4");
         groupDbService.saveGroup(group1);
         groupDbService.saveGroup(group2);
         groupDbService.saveGroup(group3);
