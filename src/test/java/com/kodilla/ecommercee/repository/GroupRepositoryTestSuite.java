@@ -44,10 +44,10 @@ public class GroupRepositoryTestSuite {
         groupRepository.save(group);
         //When
         Long id = group.getId();
-        Group sunset = groupDbService.getGroup(id);
+        Group sunshine = groupDbService.getGroup(id);
 
         //Then
-        assertEquals(sunset.getId(), id);
+        assertEquals(sunshine.getId(), id);
 
         //CleanUp
         groupRepository.delete(group);
