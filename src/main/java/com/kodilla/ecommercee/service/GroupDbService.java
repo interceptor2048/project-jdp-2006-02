@@ -16,8 +16,12 @@ public class GroupDbService {
 
     public List<Group> getAllGroups() { return groupRepository.findAll(); }
 
-    public Group getGroup(Long id){
-        return groupRepository.findById(id).orElse(new Group());
+    public Group getGroupById(Long id){
+        return groupRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public void deleteGroup(Group group){
+        groupRepository.delete(group);
     }
 
     public Group saveGroup(Group group){

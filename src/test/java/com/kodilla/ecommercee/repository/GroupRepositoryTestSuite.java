@@ -43,15 +43,13 @@ public class GroupRepositoryTestSuite {
         Group group = new Group(1L, "test");
         groupDbService.saveGroup(group);
         //When
-        Long id = groupDbService.getGroup(group.getId()).getId();
-        Group sunset = groupDbService.getGroup(id);
-        String title = sunset.getName();
+        Group groupResult = groupDbService.getGroupById(group.getId());
 
         //Then
-        assertEquals("test", title);
+        assertEquals(group.getName(),groupResult.getName());
 
         //CleanUp
-        groupRepository.delete(group);
+        groupDbService.deleteGroup(group);
     }
 
     @Test
