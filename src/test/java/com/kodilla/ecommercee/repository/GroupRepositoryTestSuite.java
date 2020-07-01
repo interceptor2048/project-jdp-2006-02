@@ -40,10 +40,10 @@ public class GroupRepositoryTestSuite {
         groupRepository.save(group);
         //When
         Long id = group.getId();
-        Group sunshine = groupRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        Group sunset = groupRepository.findById(id).orElseThrow(ProductNotFoundException::new);
 
         //Then
-        assertEquals(sunshine.getId(), id);
+        assertEquals(sunset.getId(), id);
 
         //CleanUp
         groupRepository.delete(group);
