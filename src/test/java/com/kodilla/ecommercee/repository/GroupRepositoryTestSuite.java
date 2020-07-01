@@ -40,10 +40,10 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupFindById() {
         //Given
-        Group group = new Group(1L,"test");
-        groupRepository.save(group);
+        Group group = new Group(1L, "test");
+        groupDbService.saveGroup(group);
         //When
-        Long id = group.getId();
+        Long id = groupDbService.getGroup(group.getId()).getId();
         Group sunshine = groupDbService.getGroup(id);
 
         //Then
