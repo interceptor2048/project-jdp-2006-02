@@ -36,10 +36,11 @@ public class GroupRepositoryTestSuite {
     public void testGroupFindById(){
         //Given
         Group group = new Group(1L,"test");
+        Group group2 = new Group(2L,"test2");
         groupRepository.save(group);
         //When
         Optional<Group> optionalGroup = groupRepository.findById(group.getId());
-        Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
+        Group groupResult = optionalGroup.orElse(group2);
         //Then
         Assert.assertEquals(group.getName(), groupResult.getName());
         //CleanUp
