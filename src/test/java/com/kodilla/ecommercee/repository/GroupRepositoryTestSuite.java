@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.service.GroupDbService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,9 @@ public class GroupRepositoryTestSuite {
     @Autowired
     private GroupRepository groupRepository;
 
+    @Autowired
+    private GroupDbService groupDbService;
+
     @Test
     public void testGroupSave(){
         //Given
@@ -34,13 +38,13 @@ public class GroupRepositoryTestSuite {
     }
 
     @Test
-    public void testGroupFindById() throws ProductNotFoundException {
+    public void testGroupFindById() {
         //Given
         Group group = new Group(1L,"test");
         groupRepository.save(group);
         //When
         Long id = group.getId();
-        Group sunset = groupRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        Group sunset = groupDbService.getGroup(id);
 
         //Then
         assertEquals(sunset.getId(), id);

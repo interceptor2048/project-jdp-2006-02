@@ -14,12 +14,10 @@ public class GroupDbService {
     @Autowired
     GroupRepository groupRepository;
 
-    public List<Group> getAllGroups(){
-        return groupRepository.findAll();
-    }
+    public List<Group> getAllGroups() { return groupRepository.findAll(); }
 
-    public Optional<Group> getGroup(Long id){
-        return groupRepository.findById(id);
+    public Group getGroup(Long id){
+        return groupRepository.findById(id).orElse(new Group());
     }
 
     public Group saveGroup(Group group){
