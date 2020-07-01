@@ -42,6 +42,7 @@ public class GroupRepositoryTestSuite {
         Optional<Group> xfactor = groupRepository.findById(id);
 
         //Then
+        assertEquals(xfactor.get().getId(), id);
 
         //CleanUp
         groupRepository.delete(group);
