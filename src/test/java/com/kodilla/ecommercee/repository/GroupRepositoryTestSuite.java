@@ -31,7 +31,7 @@ public class GroupRepositoryTestSuite {
         groupRepository.delete(group);
     }
 
-    @Test
+    /*@Test
     public void testGroupFindById(){
         //Given
         Group group = new Group(1L,"test");
@@ -43,7 +43,7 @@ public class GroupRepositoryTestSuite {
         assertEquals(group.getName(),groupResult.getName());
         //CleanUp
         groupRepository.delete(group);
-    }
+    }*/
 
     @Test
     public void testGroupFindAll(){
