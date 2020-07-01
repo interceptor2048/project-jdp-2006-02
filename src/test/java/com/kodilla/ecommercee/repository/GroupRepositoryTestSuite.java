@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,16 +34,16 @@ public class GroupRepositoryTestSuite {
     }
 
     @Test
-    public void testGroupFindById(){
+    public void testGroupFindById() throws ProductNotFoundException {
         //Given
         Group group = new Group(1L,"test");
         groupRepository.save(group);
         //When
         Long id = group.getId();
-        Optional<Group> sunshine = groupRepository.findById(id);
+        Group sunshine = groupRepository.findById(id).orElseThrow(ProductNotFoundException::new);
 
         //Then
-        assertEquals(sunshine.get().getId(), id);
+        assertEquals(sunshine.getId(), id);
 
         //CleanUp
         groupRepository.delete(group);
