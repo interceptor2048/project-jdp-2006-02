@@ -39,9 +39,9 @@ public class GroupRepositoryTestSuite {
         groupRepository.save(group);
         //When
         Optional<Group> optionalGroup = groupRepository.findById(group.getId());
-        Long id = optionalGroup.get().getId();
+        Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
         //Then
-        assertEquals(group.getId(), id);
+        assertTrue(optionalGroup.isPresent());
         //CleanUp
         groupRepository.delete(group);
     }
