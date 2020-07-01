@@ -44,8 +44,8 @@ public class GroupRepositoryTestSuite {
         groupDbService.saveGroup(group);
         //When
         Long id = groupDbService.getGroup(group.getId()).getId();
-        Group sunshine = groupDbService.getGroup(id);
-        String title = sunshine.getName();
+        Group sunset = groupDbService.getGroup(id);
+        String title = sunset.getName();
 
         //Then
         assertEquals("test", title);
