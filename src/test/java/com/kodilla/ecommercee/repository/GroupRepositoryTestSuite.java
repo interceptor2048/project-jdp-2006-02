@@ -39,10 +39,10 @@ public class GroupRepositoryTestSuite {
         groupRepository.save(group);
         //When
         Long id = group.getId();
-        Optional<Group> xfactor = groupRepository.findById(id);
+        Optional<Group> sunshine = groupRepository.findById(id);
 
         //Then
-        assertEquals(xfactor.get().getId(), id);
+        assertEquals(sunshine.get().getId(), id);
 
         //CleanUp
         groupRepository.delete(group);
