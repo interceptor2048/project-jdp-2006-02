@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.Group;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class GroupRepositoryTestSuite {
         Optional<Group> optionalGroup = groupRepository.findById(group.getId());
         Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
         //Then
-        assertTrue(group.getName().equals(groupResult.getName()));
+        Assert.assertEquals(group.getName(), groupResult.getName());
         //CleanUp
         groupRepository.delete(group);
     }
