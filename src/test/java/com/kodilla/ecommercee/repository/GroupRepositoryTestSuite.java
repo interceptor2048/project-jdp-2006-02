@@ -38,10 +38,11 @@ public class GroupRepositoryTestSuite {
         Group group = new Group(1L,"test");
         groupRepository.save(group);
         //When
-        Optional<Group> optionalGroup = groupRepository.findById(group.getId());
-        Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
+        Long id = group.getId();
+        Optional<Group> xfactor = groupRepository.findById(id);
+
         //Then
-        assertEquals(group.getId(), optionalGroup.get().getId());
+
         //CleanUp
         groupRepository.delete(group);
     }
