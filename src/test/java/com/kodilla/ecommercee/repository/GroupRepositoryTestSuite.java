@@ -41,7 +41,7 @@ public class GroupRepositoryTestSuite {
         Optional<Group> optionalGroup = groupRepository.findById(group.getId());
         Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
         //Then
-        assertTrue(1L == optionalGroup.get().getId());
+        assertEquals(group.getId(), optionalGroup.get().getId());
         //CleanUp
         groupRepository.delete(group);
     }
