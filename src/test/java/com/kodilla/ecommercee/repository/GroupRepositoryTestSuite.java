@@ -40,7 +40,6 @@ public class GroupRepositoryTestSuite {
         Group result = groupDbService.getGroupById(group.getId());
         //Then
         assertEquals(group.getName(),result.getName());
-        assertEquals(group.getId(),result.getId());
         //CleanUp
         groupDbService.deleteGroup(group);
     }
@@ -58,6 +57,7 @@ public class GroupRepositoryTestSuite {
         List<Group> groups = groupDbService.getAllGroups();
         //Then
         assertEquals(3,groups.size());
+        assertEquals(group2.getName(),groups.get(1).getName());
         //CleanUp
         groupDbService.deleteGroup(group1);
         groupDbService.deleteGroup(group2);
