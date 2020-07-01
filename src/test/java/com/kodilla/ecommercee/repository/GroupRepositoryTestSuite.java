@@ -39,6 +39,7 @@ public class GroupRepositoryTestSuite {
         //When
         Group result = groupDbService.getGroupById(group.getId());
         //Then
+        assertTrue(result.getId()>0);
         assertEquals(group.getName(),result.getName());
         assertEquals(group.getId(),result.getId());
         //CleanUp
