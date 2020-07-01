@@ -40,7 +40,7 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupFindById() {
         //Given
-        Group group = new Group(1L, "test");
+        Group group = new Group( "test");
         groupDbService.saveGroup(group);
         //When
         Group groupResult = groupDbService.getGroupById(group.getId());
