@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,20 +29,6 @@ public class GroupRepositoryTestSuite {
         //CleanUp
         groupRepository.delete(group);
     }
-
-    /*@Test
-    public void testGroupFindById(){
-        //Given
-        Group group = new Group(1L,"test");
-        groupRepository.save(group);
-        //When
-        Optional<Group> optionalGroup = groupRepository.findById(group.getId());
-        Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
-        //Then
-        assertEquals(group.getName(),groupResult.getName());
-        //CleanUp
-        groupRepository.delete(group);
-    }*/
 
     @Test
     public void testGroupFindAll(){
