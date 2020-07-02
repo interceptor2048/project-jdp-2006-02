@@ -13,10 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,11 +37,12 @@ public class ProductRepositoryTestSuite {
 
     @Test
     public void testGetAllProducts() {
+        int listSizeBefore = productRepository.findAll().size();
         Product product1 = new Product("Product 1", "Description 1", 10.00, testGroup);
         Product product2 = new Product("Product 2", "Description 2", 20.00, testGroup);
         productRepository.saveAll(Arrays.asList(product1, product2));
-        List<Product> productsResult = productRepository.findAll();
-        assertTrue(1 < productsResult.size());
+        int listSizeAfter = productRepository.findAll().size();
+        assertEquals(2, listSizeAfter - listSizeBefore);
         productRepository.deleteAll(Arrays.asList(product1, product2));
     }
 
