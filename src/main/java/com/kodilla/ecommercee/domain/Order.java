@@ -32,4 +32,8 @@ public class Order {
 
     @Column(name = "STATUS")
     private String status;
+
+    public Order(String status) {
+        this.status = status;
+    }
 }
