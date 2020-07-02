@@ -32,20 +32,6 @@ public class GroupRepositoryTestSuite {
     }
 
     @Test
-    public void testGroupFindById(){
-        //Given
-        Group group = new Group(1L,"test");
-        groupRepository.save(group);
-        //When
-        Optional<Group> optionalGroup = groupRepository.findById(group.getId());
-        Group groupResult = optionalGroup.orElse(new Group(2L,"test2"));
-        //Then
-        assertEquals(group.getName(),groupResult.getName());
-        //CleanUp
-        groupRepository.delete(group);
-    }
-
-    @Test
     public void testGroupFindAll(){
         //Given
         Group group1 = new Group(2L,"test2");
