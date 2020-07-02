@@ -21,7 +21,7 @@ public class GroupRepositoryTestSuite {
     @Test
     public void testGroupSave(){
         //Given
-        Group group = new Group(1L,"test1");
+        Group group = new Group("test1");
         //When
         groupRepository.save(group);
         List<Group> groups = groupRepository.findAll();
@@ -32,11 +32,25 @@ public class GroupRepositoryTestSuite {
     }
 
     @Test
+    public void testGroupFindById(){
+        //Given
+        Group group = new Group("test2");
+        groupRepository.save(group);
+        //When
+        Optional<Group> resultGroup = groupRepository.findById(group.getId());
+        //Then
+        assertTrue(resultGroup.isPresent());
+        assertEquals(group.getName(),resultGroup.get().getName());
+        //CleanUp
+        groupRepository.delete(group);
+    }
+
+    @Test
     public void testGroupFindAll(){
         //Given
-        Group group1 = new Group(2L,"test2");
-        Group group2 = new Group(3L,"test3");
-        Group group3 = new Group(4L,"test4");
+        Group group1 = new Group("test3");
+        Group group2 = new Group("test4");
+        Group group3 = new Group("test5");
         groupRepository.save(group1);
         groupRepository.save(group2);
         groupRepository.save(group3);
