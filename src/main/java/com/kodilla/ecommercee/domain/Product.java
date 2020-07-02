@@ -21,4 +21,8 @@ public class Product {
     private String description;
     private double price;
     private Long groupId;
+
+    public Product(String name) {
+        this.name = name;
+    }
 }
