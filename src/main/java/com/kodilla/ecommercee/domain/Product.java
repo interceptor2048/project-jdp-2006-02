@@ -4,25 +4,38 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "PRODUCT")
 public class Product {
 
     @Id
-    @Column(name = "ID")
+    @GeneratedValue
     private Long id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "DESCRIPTION")
     private String description;
+
+    @Column(name = "PRICE")
     private double price;
-    private Long groupId;
 
     public Product(String name) {
         this.name = name;
+      
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
+
+    public Product(String name, String description, double price, Group group) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.group = group;
     }
 }
