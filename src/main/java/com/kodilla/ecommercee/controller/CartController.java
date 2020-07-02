@@ -15,9 +15,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*")
 public class CartController {
 
-    @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart", consumes = APPLICATION_JSON_VALUE)
-    public CartDto createEmptyCart() {
-        return new CartDto(1L, 1L);
+    @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
+    public CartDto createEmptyCart(@RequestParam Long userId) {
+        return new CartDto(1L, userId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
