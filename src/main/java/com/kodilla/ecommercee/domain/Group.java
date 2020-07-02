@@ -20,4 +20,7 @@ public class Group {
     @Column(name = "NAME")
     private String name;
 
+    public Group(String name) {
+        this.name = name;
+    }
 }
