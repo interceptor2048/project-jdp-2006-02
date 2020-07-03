@@ -18,6 +18,9 @@ public class Order {
     @Column(name = "ORDER_ID", unique = true)
     private Long id;
 
+    @Column(name = "ORDER_NAME")
+    private String orderName;
+
     @ManyToOne
     @JoinColumn(name = "USER")
     private User user;
@@ -35,5 +38,10 @@ public class Order {
 
     public Order(String status) {
         this.status = status;
+    }
+
+    public Order(String orderName, User user) {
+        this.orderName = orderName;
+        this.user = user;
     }
 }
