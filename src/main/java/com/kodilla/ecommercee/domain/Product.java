@@ -25,6 +25,9 @@ public class Product {
     @Column(name = "PRICE")
     private double price;
 
+    public Product(String name) {
+        this.name = name;
+      
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private Group group;

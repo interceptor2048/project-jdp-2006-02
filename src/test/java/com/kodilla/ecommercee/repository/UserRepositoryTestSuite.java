@@ -18,9 +18,6 @@ public class UserRepositoryTestSuite {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    //ProductRepository productRepository;
-
     @Test
     public void testSaveUser() {
         //Given
