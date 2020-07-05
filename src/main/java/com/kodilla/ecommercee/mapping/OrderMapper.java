@@ -13,28 +13,32 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderMapper {
 
-    private final UserDbService userDbService;
-    private final UserMapper userMapper;
+    //Committed code in waiting for class UserMapper and UserDbService
+    //private final UserDbService userDbService;
+    //private final UserMapper userMapper; Committed in waiting for UserMapper
 
-    public Order mapToOrder(OrderDto orderDto) throws UserNotFoundException {
+    public Order mapToOrder(OrderDto orderDto) {
         return new Order(
-                orderDto.getName(),
-                userDbService.getUser(orderDto.getUserDto().getId()).orElseThrow(UserNotFoundException::new));
+                orderDto.getId(),
+                orderDto.getStatus()
+                //userDbService.getUser(orderDto.getUserDto().getId()).orElseThrow(UserNotFoundException::new)
+        );
     }
 
     public OrderDto mapToOrderDto(Order order) {
         return new OrderDto(
                 order.getId(),
-                order.getOrderName(),
-                userMapper.mapToUserDto(order.getUser()));
+                order.getStatus()
+                //userMapper.mapToUserDto(order.getUser())
+        );
     }
 
     public List<OrderDto> mapToOrderDtoList(List<Order> orderList) {
         return orderList.stream()
                 .map(order -> new OrderDto(
                         order.getId(),
-                        order.getOrderName(),
-                        userMapper.mapToUserDto(order.getUser())))
+                        order.getStatus()))
+                //userMapper.mapToUserDto(order.getUser()))
                 .collect(Collectors.toList());
     }
 }

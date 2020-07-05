@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderDto {
     private Long id;
-    private String name;
-    UserDto userDto;
+    private String status;
+
+    //Committed in waiting for class UserMapper
+    //UserDto userDto;
 }
