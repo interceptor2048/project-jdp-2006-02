@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @Entity(name = "T_USER")
 public class User {
 
@@ -24,11 +23,13 @@ public class User {
     @Column(name = "USERNAME")
     private String username;
 
+    @Setter
     @Column(name = "STATUS")
     private String status;
 
+    @Setter
     @Column(name = "USER_KEY")
-    private String userKey;
+    private int userKey;
 
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = com.kodilla.ecommercee.domain.Product.class)
     @JoinTable(
@@ -38,7 +39,14 @@ public class User {
     )
     private List<Product> productList = new ArrayList<>();
 
-    public User(String username, String status, String userKey) {
+    public User(String username, String status, int userKey) {
+        this.username = username;
+        this.status = status;
+        this.userKey = userKey;
+    }
+
+    public User(Long id, String username, String status, int userKey) {
+        this.id = id;
         this.username = username;
         this.status = status;
         this.userKey = userKey;
