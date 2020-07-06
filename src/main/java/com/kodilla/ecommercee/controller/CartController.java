@@ -3,6 +3,8 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.service.CartDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "*")
 public class CartController {
 
+    @Autowired
+    private CartDbService cartDbService;
+
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
     public CartDto createEmptyCart(@RequestParam Long userId) {
-        return new CartDto(1L, userId);
+        return cartDbService.createCart(userId);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
@@ -27,11 +32,12 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
     public CartDto addProductToCart(@RequestBody ProductDto productDto) {
-        return new CartDto(1L, 2L);
+        return cartDbService.addProduct(productDto);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
     public void deleteProductFromCart(@RequestParam Long productId) {
+        cartDbService.deleteProduct(productId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
