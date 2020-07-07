@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ public class User {
     @Column(name = "USERNAME")
     private String username;
 
+    @Setter
     @Column(name = "STATUS")
     private String status;
 
+    @Setter
     @Column(name = "USER_KEY")
-    private String userKey;
+    private int userKey;
 
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = com.kodilla.ecommercee.domain.Product.class)
     @JoinTable(
@@ -35,4 +38,17 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")}
     )
     private List<Product> productList = new ArrayList<>();
+
+    public User(String username, String status, int userKey) {
+        this.username = username;
+        this.status = status;
+        this.userKey = userKey;
+    }
+
+    public User(Long id, String username, String status, int userKey) {
+        this.id = id;
+        this.username = username;
+        this.status = status;
+        this.userKey = userKey;
+    }
 }
