@@ -20,7 +20,7 @@ public class UserRepositoryTestSuite {
     @Test
     public void testSaveUser() {
         //Given
-        User user = new User("Jack", "active", "0");
+        User user = new User("Jack", "active", 0);
 
         //When
         userRepository.save(user);
@@ -38,7 +38,7 @@ public class UserRepositoryTestSuite {
     public void testFindUserById() {
 
         //Given
-        User user = new User("Jack", "active", "0");
+        User user = new User("Jack", "active", 0);
         userRepository.save(user);
         Long id = user.getId();
 
@@ -56,7 +56,7 @@ public class UserRepositoryTestSuite {
     public void testBlockUser() {
 
         //Given
-        User user = new User("Jack", "active", "0");
+        User user = new User("Jack", "active", 0);
         userRepository.save(user);
         Long id = user.getId();
 
@@ -75,17 +75,17 @@ public class UserRepositoryTestSuite {
     public void testGenerateUserKey() {
 
         //Given
-        User user = new User("Jack", "active", "0");
+        User user = new User("Jack", "active", 0);
         userRepository.save(user);
         Long id = user.getId();
 
         //When
         Optional<User> generateUserKeyTestUser = userRepository.findById(id);
-        generateUserKeyTestUser.get().setUserKey("12345");
+        generateUserKeyTestUser.get().setUserKey(12345);
 
         //Then
-        Assert.assertNotEquals("0", generateUserKeyTestUser.get().getUserKey());
-        Assert.assertEquals("12345", generateUserKeyTestUser.get().getUserKey());
+        Assert.assertNotEquals(0, generateUserKeyTestUser.get().getUserKey());
+        Assert.assertEquals(12345, generateUserKeyTestUser.get().getUserKey());
 
         //CleanUp
         userRepository.deleteById(id);
