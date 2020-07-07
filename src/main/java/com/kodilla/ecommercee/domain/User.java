@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name = "T_USER")
 public class User {
 
@@ -35,4 +37,10 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")}
     )
     private List<Product> productList = new ArrayList<>();
+
+    public User(String username, String status, String userKey) {
+        this.username = username;
+        this.status = status;
+        this.userKey = userKey;
+    }
 }
