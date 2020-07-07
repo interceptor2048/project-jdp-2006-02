@@ -20,6 +20,7 @@ public class UserDbService {
 
     public User blockUser(User user) {
         user.setStatus("block");
+        userRepository.save(user);
         return user;
     }
 
@@ -27,6 +28,7 @@ public class UserDbService {
         Random random = new Random();
         int key = random.nextInt(89999) + 10000;
         user.setUserKey(key);
+        userRepository.save(user);
         return user;
     }
 }
