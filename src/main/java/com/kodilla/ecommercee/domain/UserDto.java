@@ -12,5 +12,5 @@ public class UserDto {
     private Long id;
     private String username;
     private String status;
-    private String userKey;
+    private int userKey;
 }
