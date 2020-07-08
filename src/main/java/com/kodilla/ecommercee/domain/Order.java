@@ -41,4 +41,10 @@ public class Order {
         this.status = status;
         this.user = user;
     }
+
+    public Order(Long id, User user, String status) {
+        this.id = id;
+        this.user = user;
+        this.status = status;
+    }
 }

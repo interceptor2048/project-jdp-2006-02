@@ -33,7 +33,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
-    public OrderDto getOrder(@RequestParam Long id) throws OrderNotFoundException {
+    public OrderDto getOrder(@RequestParam Long id) {
         return orderMapper.mapToOrderDto(orderDbService.getOrder(id).orElseThrow(OrderNotFoundException::new));
     }
 
@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
-    public void deleteOrder(@RequestParam Long id) throws OrderNotFoundException {
+    public void deleteOrder(@RequestParam Long id) {
         if (orderDbService.getOrder(id).isPresent()) {
             orderDbService.deleteOrder(id);
         } else {

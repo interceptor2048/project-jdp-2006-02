@@ -20,10 +20,11 @@ public class OrderMapper {
     @Autowired
     private UserMapper userMapper;
 
-    public Order mapToOrder(OrderDto orderDto) throws OrderNotFoundException {
+    public Order mapToOrder(OrderDto orderDto) {
         return new Order(
-                orderDto.getStatus(),
-                userDbService.getUser(orderDto.getUserDto().getId()).orElseThrow(UserNotFoundException::new));
+                orderDto.getId(),
+                userDbService.getUser(orderDto.getUserDto().getId()).orElseThrow(UserNotFoundException::new),
+                orderDto.getStatus());
     }
 
     public OrderDto mapToOrderDto(Order order) {

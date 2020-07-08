@@ -8,5 +8,5 @@ import lombok.Getter;
 public class OrderDto {
     private Long id;
     private String status;
-    UserDto userDto;
+    private UserDto userDto;
 }
