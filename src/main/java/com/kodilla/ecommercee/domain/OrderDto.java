@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class OrderDto {
     private Long id;
-    private Long userId;
     private String status;
+    private UserDto userDto;
 }

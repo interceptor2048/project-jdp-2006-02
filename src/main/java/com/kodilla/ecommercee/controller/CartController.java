@@ -3,6 +3,10 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.mapping.UserMapper;
+import com.kodilla.ecommercee.service.UserDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,6 +18,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/cart")
 @CrossOrigin(origins = "*")
 public class CartController {
+
+    @Autowired
+    UserDbService userDbService;
+
+    @Autowired
+    UserMapper userMapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
     public CartDto createEmptyCart(@RequestParam Long userId) {
@@ -36,6 +46,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam Long userId) {
-        return new OrderDto(1L, userId, "status");
+        return new OrderDto(1L, "status",
+                userMapper.mapToUserDto(userDbService.getUser(userId).orElseThrow(UserNotFoundException::new)));
     }
 }
