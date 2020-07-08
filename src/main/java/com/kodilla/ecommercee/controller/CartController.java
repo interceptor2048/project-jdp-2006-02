@@ -48,7 +48,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
-    public List<ProductDto> addProductToCart(@RequestBody Long userId, @RequestParam Long productId) {
+    public List<ProductDto> addProductToCart(@RequestParam Long userId, @RequestParam Long productId) {
         User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
         Product product = productDbService.getProduct(productId).orElseThrow(ProductNotFoundException::new);
         user.getProductList().add(product);
