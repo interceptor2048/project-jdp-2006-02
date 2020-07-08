@@ -36,4 +36,15 @@ public class Order {
     public Order(String status) {
         this.status = status;
     }
+
+    public Order(String status, User user) {
+        this.status = status;
+        this.user = user;
+    }
+
+    public Order(Long id, User user, String status) {
+        this.id = id;
+        this.user = user;
+        this.status = status;
+    }
 }
