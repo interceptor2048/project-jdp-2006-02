@@ -36,4 +36,9 @@ public class Order {
     public Order(String status) {
         this.status = status;
     }
+
+    public Order(String status, User user) {
+        this.status = status;
+        this.user = user;
+    }
 }
