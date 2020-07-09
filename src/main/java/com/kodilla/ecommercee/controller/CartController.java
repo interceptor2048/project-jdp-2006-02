@@ -1,15 +1,17 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.domain.OrderDto;
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.exception.EmptyCartException;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.exception.UserNotFoundException;
-import com.kodilla.ecommercee.mapping.UserMapper;
+import com.kodilla.ecommercee.mapping.OrderMapper;
+import com.kodilla.ecommercee.mapping.ProductMapper;
+import com.kodilla.ecommercee.service.OrderDbService;
+import com.kodilla.ecommercee.service.ProductDbService;
 import com.kodilla.ecommercee.service.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -20,33 +22,65 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CartController {
 
     @Autowired
-    UserDbService userDbService;
-
+    private ProductDbService productDbService;
     @Autowired
-    UserMapper userMapper;
+    private ProductMapper productMapper;
+    @Autowired
+    private OrderDbService orderDbService;
+    @Autowired
+    private UserDbService userDbService;
+    @Autowired
+    private OrderMapper orderMapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "createEmptyCart")
-    public CartDto createEmptyCart(@RequestParam Long userId) {
-        return new CartDto(1L, userId);
+    public List<ProductDto> createEmptyCart(@RequestParam Long userId) {
+        User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
+        user.getProductList().clear();
+        userDbService.createUser(user);
+        return productMapper.mapToProductDtoList(user.getProductList());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
-    public List<ProductDto> getProductsFromCart() {
-        return new ArrayList<>();
+    public List<ProductDto> getProductsFromCart(@RequestParam Long userId) {
+        User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
+        return productMapper.mapToProductDtoList(user.getProductList());
+
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
-    public CartDto addProductToCart(@RequestBody ProductDto productDto) {
-        return new CartDto(1L, 2L);
+    public List<ProductDto> addProductToCart(@RequestParam Long userId, @RequestParam Long productId) {
+        User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
+        Product product = productDbService.getProduct(productId).orElseThrow(ProductNotFoundException::new);
+        user.getProductList().add(product);
+        userDbService.createUser(user);
+        return productMapper.mapToProductDtoList(user.getProductList());
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
-    public void deleteProductFromCart(@RequestParam Long productId) {
+    public List<ProductDto> deleteProductFromCart(@RequestParam Long userId, @RequestParam Long productId) {
+        User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
+        Product product = productDbService.getProduct(productId).orElseThrow(ProductNotFoundException::new);
+        user.getProductList().remove(product);
+        userDbService.createUser(user);
+        return productMapper.mapToProductDtoList(user.getProductList());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam Long userId) {
-        return new OrderDto(1L, "status",
-                userMapper.mapToUserDto(userDbService.getUser(userId).orElseThrow(UserNotFoundException::new)));
+
+        User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
+        if(user.getProductList().size() == 0) {
+            throw new EmptyCartException();
+        }
+        Order oder = new Order( "New order", user);
+        for (Product product: user.getProductList()) {
+            oder.getProducts().add(product);
+        }
+        user.getProductList().clear();
+        userDbService.createUser(user);
+        orderDbService.saveOrder(oder);
+        return orderMapper.mapToOrderDto(oder);
+
     }
 }
