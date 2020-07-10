@@ -24,6 +24,13 @@ public class UserController {
     public UserDto getUser(@RequestParam Long id) throws UserNotFoundException {
         return userMapper.mapToUserDto(userDbService.getUser(id).orElseThrow(UserNotFoundException::new));}
 
+
+        //metoda zrobiona tylko do testu dostępności
+        @RequestMapping(method = RequestMethod.GET, value = "getMessage")
+        public String getMessage() {
+            return "Wiadomość tylko dla moda!";
+        }
+
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userMapper.mapToUserDto(userDbService.createUser(userMapper.mapToUser(userDto)));}
