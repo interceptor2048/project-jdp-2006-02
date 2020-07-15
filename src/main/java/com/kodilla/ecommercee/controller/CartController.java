@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
 @RequestMapping("/v1/cart")
 @CrossOrigin(origins = "*")
@@ -47,7 +45,7 @@ public class CartController {
 
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
     public List<ProductDto> addProductToCart(@RequestParam Long userId, @RequestParam Long productId) {
         User user = userDbService.getUser(userId).orElseThrow(UserNotFoundException::new);
         Product product = productDbService.getProduct(productId).orElseThrow(ProductNotFoundException::new);
