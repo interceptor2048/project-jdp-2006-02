@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.time.LocalTime;
 import java.util.List;
 
@@ -92,7 +92,7 @@ public class CartController {
         user.getProductList().clear();
         userDbService.createUser(user);
         orderDbService.saveOrder(oder);
-        LOGGER.info("Order for " +user.getUsername() + " was placed on a day " + date + " an hour " + time);
+        LOGGER.info("Order for " + user.getUsername() + " was placed on a day " + date + " an hour " + time);
         return orderMapper.mapToOrderDto(oder);
 
     }
