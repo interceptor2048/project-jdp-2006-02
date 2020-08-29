@@ -29,6 +29,13 @@ public class UserController {
         LOGGER.info("The following user " + id + " has been selected.");
         return userMapper.mapToUserDto(userDbService.getUser(id).orElseThrow(UserNotFoundException::new));}
 
+
+        //metoda zrobiona tylko do testu dostępności
+        @RequestMapping(method = RequestMethod.GET, value = "getMessage")
+        public String getMessage() {
+            return "Wiadomość tylko dla moda!";
+        }
+
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
         LOGGER.info("The user " + userDto.getUsername() + " was successfully created.");
